@@ -13,7 +13,7 @@ function judgeChinese(str) {
 
 //是否是手机号
 function judgePhone(str) {
-	var reg = /0?(13|14|15|18)[0-9]{9}/
+	var reg = /^1[3456789]\d{9}$/
 	return reg.test(str)
 }
 
