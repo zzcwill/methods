@@ -58,3 +58,9 @@ function checkSpaceCharacter(val){
 		return false;
 	}
 }
+
+//是否有+号
+function judgePlusSign(str) {
+	var reg = /[\+]/g;
+	return reg.test(str)
+}
