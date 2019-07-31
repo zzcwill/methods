@@ -64,3 +64,25 @@ function judgePlusSign(str) {
 	var reg = /[\+]/g;
 	return reg.test(str)
 }
+
+//判断是否满足保留几位小数
+function judgeNumberDecimal(num, n) {
+	var isOk = true;
+	var str = num + '';
+	var index = str.indexOf('.') + 1;
+	var sum = str.length - index;
+
+	if (sum > n) {
+		isOk = false
+	}
+	return isOk;
+}
+//判断是否数字
+function judgeNumber(num) {
+	var isOK = true;
+	var reg = /^[0-9]+.?[0-9]*/;
+	if (!reg.test(num)) {
+		isOK = false;
+	}
+	return isOK
+}
