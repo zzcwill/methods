@@ -125,3 +125,24 @@ function getTimeDHMS(t){
 	
 	return days+"天" + hours+"小时" + minutes+"分"+seconds+"秒";		
 }
+
+//获取上个月1号日期
+function getPreMonthOneDay() {
+	var date = getTimeYMD();
+	var arr = date.split('-');
+	var year = arr[0]; //获取当前日期的年份
+	var month = arr[1]; //获取当前日期的月份
+
+	var year2 = year;
+	var month2 = parseInt(month) - 1;
+	if (month2 == 0) {
+			year2 = parseInt(year2) - 1;
+			month2 = 12;
+	}
+
+	if (month2 < 10) {
+			month2 = '0' + month2;
+	}
+	var t2 = year2 + '-' + month2 + '-' + '01';
+	return t2;
+}
