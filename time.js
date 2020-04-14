@@ -1,6 +1,11 @@
 /*
 * 时间处理相关方法
 * */
+function sleep(ms) {
+  var start = Date.now(), expire = start + ms;
+  while (Date.now() < expire) ;
+  return true;
+}
 
 
 //获取当前时间的毫秒
