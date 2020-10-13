@@ -27,3 +27,16 @@ function dataToData(data1, data2) {
 var obj = { a: 1 };
 console.log(obj.hasOwnProperty('a'))
 console.log('a' in obj); // true
+
+//深度copy
+function deepCopy(elments){
+    //根据传入的元素判断是数组还是对象
+    let newElments = elments instanceof Array ? [] : {};
+
+    for(let key in elments){
+        //注意数组也是对象类型，如果遍历的元素是对象，进行深度拷贝
+        newElments[key] = typeof elments[key] === 'object' ? copy(elments[key]) : elments[key];
+    }
+
+    return newElments;
+}
