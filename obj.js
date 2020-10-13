@@ -22,3 +22,8 @@ function dataToData(data1, data2) {
 
 	return data;
 }
+
+//检查对象属性是否存在
+var obj = { a: 1 };
+console.log(obj.hasOwnProperty('a'))
+console.log('a' in obj); // true
