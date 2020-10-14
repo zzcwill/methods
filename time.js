@@ -6,6 +6,17 @@ function sleep(ms) {
   while (Date.now() < expire) ;
   return true;
 }
+function sleepPromise(ms) {
+	return new Promise((resolve, reject) => setTimeout(() => {
+		resolve(ms);
+		
+	}, ms));
+}
+// console.time('zzc')
+// sleepPromise(4000).then((data)=>{
+// 	console.info(data)
+// 	console.timeEnd('zzc')
+// })
 
 
 //获取当前时间的毫秒
