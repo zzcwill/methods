@@ -162,3 +162,29 @@ function getPreMonthOneDay() {
 	var t2 = year2 + '-' + month2 + '-' + '01';
 	return t2;
 }
+
+
+//获取下几个月的日期
+function getNextSomeMonthOneDay(day, loanTerm) {
+	var date = day;
+	var arr = date.split('-');
+	var year = arr[0]; //获取当前日期的年份
+	var month = arr[1]; //获取当前日期的月份
+
+	var nextYearNum = parseInt(loanTerm / 12);
+	var nextMonthNum = loanTerm % 12;
+
+	var year2 = parseInt(year) + nextYearNum;
+	var month2 = parseInt(month) + nextMonthNum;
+
+	if (month2 > 12) {
+		month2 = month2 - 12;
+		year2 = year2 + 1
+	}
+
+	if (month2 < 10) {
+			month2 = '0' + month2;
+	}
+	var t2 = year2 + '-' + month2 + '-' + arr[2];
+	return t2;
+}
