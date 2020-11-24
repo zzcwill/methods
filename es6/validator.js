@@ -11,7 +11,7 @@ function isPhone(str) {
   return reg.test(str)
 }
 function isEmpty(str) {
-  if (str === '') {
+  if (str !== '') {
     return false
   }
   return true
@@ -86,7 +86,6 @@ class Validator {
     let paramValue = this.data[key]
     let result
     for (let rule of rules) {
-      console.info(rule.options)
       if(rule.options) {
         result = rule.ruleFn(paramValue,rule.options)
       }
