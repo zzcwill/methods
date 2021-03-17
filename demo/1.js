@@ -1,4 +1,8 @@
-process.nextTick(function(){
-	console.info(1)
-})
-console.info(2)
+var foo = function () {
+		(function () {
+		console.log(local);
+		}());
+		var local = "局部变量";
+	};
+
+	foo()
