@@ -49,3 +49,9 @@ function strEllipsis(str,num) {
 	var newStr = str.slice(0,num-1) + '...';
 	return newStr;
 }
+
+// 取num内随机数
+function strRandomNumber(num) {
+	var str = Math.round(Math.random()*num) + ''
+	return str
+}
