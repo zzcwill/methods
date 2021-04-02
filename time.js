@@ -143,11 +143,10 @@ function getTimeDHMS(t) {
 }
 
 //获取上个月1号日期
-function getPreMonthOneDay() {
-	var date = getTimeYMD();
-	var arr = date.split('-');
-	var year = arr[0]; //获取当前日期的年份
-	var month = arr[1]; //获取当前日期的月份
+function getPreMonthOneDay() {	
+	var t = new Date()
+	var year = t.getFullYear()
+	var month = t.getMonth() + 1
 
 	var year2 = year;
 	var month2 = parseInt(month) - 1;
@@ -161,6 +160,37 @@ function getPreMonthOneDay() {
 	}
 	var t2 = year2 + '-' + month2 + '-' + '01';
 	return t2;
+}
+
+//获取当前月-月初
+function getNowMonthFirstDay() {
+	var t = new Date()
+	var year = t.getFullYear()
+	var month = t.getMonth() + 1
+
+	if (month < 10) {
+		month = '0' + month;
+	}
+	var time = year + '-' + month + '-' + '01';
+	return time;
+}
+
+//获取当前月-月末
+function getNowMonthLastDay() {
+	var t = new Date()
+	var year = t.getFullYear()
+	var month = t.getMonth() + 1
+
+	var nextMonthFirstDay = new Date(year,month,1);
+	var oneDay = 1000*60*60*24;
+	var lastDay = new Date(nextMonthFirstDay-oneDay);
+	var day = lastDay.getDate();
+
+	if (month < 10) {
+		month = '0' + month;
+	}
+	var time = year + '-' + month + '-' + day;
+	return time;
 }
 
 
