@@ -1,9 +1,14 @@
 // 压缩图片
 function compressImage(file, success, error) {
 	// 图片小于1M不压缩
-	if (file.size < Math.pow(1024*2, 2)) {
+	if (file.size < Math.pow(1024*1, 2)) {
 			return success(file);
 	}
+
+	var fileTypeImgPdf = ["image/png","image/jpeg"];
+	if(fileTypeImgPdf.indexOf(file.type) === -1) {
+			return success(file);
+	}	
 
 	var name = file.name; //文件名
 	var reader = new FileReader();
