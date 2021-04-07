@@ -1,8 +1,5 @@
-var foo = function () {
-		(function () {
-		console.log(local);
-		}());
-		var local = "局部变量";
-	};
+function fn() {
+	console.info(1)
+}
 
-	foo()
+exports.fn = fn
