@@ -1,9 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const filePath = path.resolve(__dirname, 'hello.txt')
+　　var name = "The Window";
 
-console.log('filePath: ', filePath);
+　　var object = {
+　　　　name : "My Object",
 
-fs.readFile(filePath, (err, res) => {
-  console.log(err, res.toString());
-});
+　　　　getNameFunc : function(){
+	　　　　　　var that = this;
+	　　　　　　return function(){
+	　　　　　　　　return that.name;
+	　　　　　　};
+
+　　　　}
+
+　　};
+
+console.info(object.getNameFunc()());
