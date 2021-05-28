@@ -158,4 +158,31 @@ where c.cid = sc.cid
 group by c.cid
 order by count(*) desc, c.cid asc;
 
--- 15
+-- 15-分数排名
+select s.*, rank_01, rank_02, rank_03, rank_total
+from student s
+left join (select sid, rank() over(partition by cid order by score desc) as rank_01 from sc where cid=01) A on s.sid=A.sid
+left join (select sid, rank() over(partition by cid order by score desc) as rank_02 from sc where cid=02) B on s.sid=B.sid
+left join (select sid, rank() over(partition by cid order by score desc) as rank_03 from sc where cid=03) C on s.sid=C.sid
+left join (select sid, rank() over(order by avg(score) desc) as rank_total from sc group by sid) D on s.sid=D.sid
+order by rank_total asc;
+
+-- 15.1
+select s.*, rank_01, rank_02, rank_03, rank_total
+from student s
+left join (select sid, dense_rank() over(partition by cid order by score desc) as rank_01 from sc where cid=01) A on s.sid=A.sid
+left join (select sid, dense_rank() over(partition by cid order by score desc) as rank_02 from sc where cid=02) B on s.sid=B.sid
+left join (select sid, dense_rank() over(partition by cid order by score desc) as rank_03 from sc where cid=03) C on s.sid=C.sid
+left join (select sid, dense_rank() over(order by avg(score) desc) as rank_total from sc group by sid) D on s.sid=D.sid
+order by rank_total asc;
+
+-- 17
+select c.cid as 课程编号, c.cname as 课程名称, A.*
+from course as c,
+(select cid,
+    sum(case when score >= 85 then 1 else 0 end)/count(*) as 100_85,
+    sum(case when score >= 70 and score < 85 then 1 else 0 end)/count(*) as 85_70,
+    sum(case when score >= 60 and score < 70 then 1 else 0 end)/count(*) as 70_60,
+    sum(case when score < 60 then 1 else 0 end)/count(*) as 60_0
+from sc group by cid) as A
+where c.cid = A.cid;
