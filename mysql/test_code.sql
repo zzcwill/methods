@@ -186,3 +186,86 @@ from course as c,
     sum(case when score < 60 then 1 else 0 end)/count(*) as 60_0
 from sc group by cid) as A
 where c.cid = A.cid;
+
+-- 18
+select * from (select *, rank() over(partition by cid order by score desc, id asc) as graderank from sc) A 
+where A.graderank <= 3;
+
+-- 20
+SELECT s.sid, s.sname,COUNT(sc.cid) cnum
+FROM student s,
+		 sc
+ WHERE
+    s.sid = sc.sid 
+GROUP BY s.sid
+HAVING COUNT(sc.cid) =2;
+
+-- 22
+SELECT *
+FROM student
+WHERE
+    sname LIKE '%风%';
+
+-- 24
+select * from student where year(sage) = 1990;
+-- or
+SELECT *
+FROM student
+WHERE
+    sage >= '1990-01-01 00:00:00'
+		AND
+		sage < '1990-12-30 23:59:59'
+;
+
+-- 33
+SELECT a.*, c.cname,b.score
+FROM student a
+     INNER JOIN
+		 sc b on a.sid = b.sid
+		 INNER JOIN
+		 course c on b.cid = c.cid
+		 INNER JOIN
+		 teacher d on c.tid = d.tid
+WHERE d.tname= '张三'
+ORDER BY b.score DESC
+LIMIT 1;
+
+-- 34
+SELECT s.*, sc.cid, sc.score
+FROM student s
+     INNER JOIN
+		 sc on s.sid = sc.Sid
+		 INNER JOIN
+		 course c on sc.cid = c.cid
+		 INNER JOIN 
+		 teacher t on c.tid = t.tid
+WHERE t.tname='张三'
+ORDER BY sc.score DESC
+LIMIT 1;
+
+-- 40
+SELECT *, (year(NOW())-year(sage)) as age
+FROM student;
+
+-- 41
+select sname, timestampdiff(year, sage, now()) as age from student;
+
+
+-- 42
+select * from student 
+where week(now()) = week(sage);
+
+
+-- 43
+select * from student where (week(now())+1) = week(sage);
+
+
+-- 44
+select * from student 
+where month(now()) = month(sage);
+
+
+-- 45
+select * from student 
+where (month(now())+1) = month(sage);
+
