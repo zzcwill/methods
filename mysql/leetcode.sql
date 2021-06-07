@@ -38,7 +38,7 @@ WHERE
     p1.Email = p2.Email AND p1.Id > p2.Id;
 
 
--- 1179-n
+-- 1179-n-分组转换
 select id,
     sum(case month when 'Jan' then revenue end) as Jan_Revenue,
     sum(case month when 'Feb' then revenue end) as Feb_Revenue,
@@ -55,7 +55,7 @@ select id,
 from Department
 group by id;
 
--- 197
+-- 197-n-昨天
 SELECT
     weather.id AS 'Id'
 FROM
