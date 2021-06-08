@@ -64,4 +64,92 @@ FROM
     weather w ON DATEDIFF(weather.recordDate, w.recordDate) = 1
         AND weather.Temperature > w.Temperature;
 
+-- 596
+SELECT class 
+FROM courses
+GROUP BY class
+HAVING COUNT(DISTINCT student) >= 5;
+
+-- 178-n
+SELECT 
+Score,
+dense_rank() over (order by Score desc)  as 'Rank'
+-- 不指定 partition by 相当于所有行数据一个 partition, 数据进行区内排序
+-- dense_rank() 相当于每一行数据一个窗口, 对数据进行比较
+FROM Scores;
+
+-- 177-n
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+    SET N := N-1;
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT 
+            salary
+      FROM 
+            employee
+      GROUP BY 
+            salary
+      ORDER BY 
+            salary DESC
+      LIMIT N, 1
+  );
+END
+
+-- 626-n
+SELECT
+    (CASE
+        WHEN MOD(id, 2) != 0 AND counts != id THEN id + 1
+        WHEN MOD(id, 2) != 0 AND counts = id THEN id
+        ELSE id - 1
+    END) AS id,
+    student
+FROM
+    seat,
+    (SELECT
+        COUNT(*) AS counts
+    FROM
+        seat) AS seat_counts
+ORDER BY id ASC;
+
+-- 184-n
+SELECT
+    Department.name AS 'Department',
+    Employee.name AS 'Employee',
+    Salary
+FROM
+    Employee
+        JOIN
+    Department ON Employee.DepartmentId = Department.Id
+WHERE
+    (Employee.DepartmentId , Salary) IN
+    (   SELECT
+            DepartmentId, MAX(Salary)
+        FROM
+            Employee
+        GROUP BY DepartmentId
+    );
+
+-- 180-n
+SELECT DISTINCT
+    l1.Num AS ConsecutiveNums
+FROM
+    Logs l1,
+    Logs l2,
+    Logs l3
+WHERE
+    l1.Id = l2.Id - 1
+    AND l2.Id = l3.Id - 1
+    AND l1.Num = l2.Num
+    AND l2.Num = l3.Num
+;
+
+-- 262-n
+
+
+
+
+
+
+
 
