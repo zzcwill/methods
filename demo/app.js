@@ -1,16 +1,15 @@
-　　var name = "The Window";
-
-　　var object = {
-　　　　name : "My Object",
-
-　　　　getNameFunc : function(){
-	　　　　　　var that = this;
-	　　　　　　return function(){
-	　　　　　　　　return that.name;
-	　　　　　　};
-
-　　　　}
-
-　　};
-
-console.info(object.getNameFunc()());
+function myApiFunc(callback)
+{
+/*
+ * This pattern does NOT work!
+ */
+try {
+  doSomeAsynchronousOperation(function (err) {
+    if (err)
+      throw (err);
+    /* continue as normal */
+  });
+} catch (ex) {
+  callback(ex);
+}
+}
