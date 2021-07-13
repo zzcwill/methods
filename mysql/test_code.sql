@@ -269,3 +269,7 @@ where month(now()) = month(sage);
 select * from student 
 where (month(now())+1) = month(sage);
 
+-- 行转列
+select 'username' as part, username from user where username is not null union
+select 'uid' as part, uid from user where uid is not null
+
